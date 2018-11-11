@@ -1,0 +1,61 @@
+﻿<mah:MetroWindow x:Class="PrismAndMefExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrismAndMefExample"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:views="clr-namespace:PrismAndMefExample.Views"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"                
+        Title="Prism Autofac and MEF" Height="650" Width="1000">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <mah:MetroWindow.Flyouts>
+        <mah:FlyoutsControl>
+            <mah:Flyout Position="Right"
+                        Width="400"
+                        Header="Settings"
+                        AreAnimationsEnabled="True"
+                        IsModal="True"
+                        IsOpen="{Binding IsSettingsOpened}">
+                <views:SettingsView DataContext="{Binding SettingsViewModel}" />
+            </mah:Flyout>
+        </mah:FlyoutsControl>
+    </mah:MetroWindow.Flyouts>
+
+    <Grid Name="Grid">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Prism Autofac and MEF" Style="{StaticResource TitleStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Margin="10" HorizontalAlignment="Right">
+            <Button Height="40" Width="120" Command="{Binding OpenSettingsCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconModern Kind="Save" Margin="5, 0"/>
+                    <TextBlock Text="Settings"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <views:HomeView Grid.Row="1" DataContext="{Binding HomeViewModel}"/>
+
+    </Grid>
+</mah:MetroWindow>
+
